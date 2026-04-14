@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viandas Corporativas — Natural Chef Alta Gracia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde:        #2C4A2E;
+  --verde-medio:  #3D6B40;
+  --verde-claro:  #5A8F5E;
+  --crema:        #F5F0E8;
+  --crema-oscuro: #EBE4D6;
+  --texto:        #1A1A1A;
+  --suave:        #5C5C5C;
+  --blanco:       #FFFFFF;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--texto); background: var(--blanco); overflow-x: hidden; }
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 72px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(44,74,46,0.1);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+.nav-logo {
+  font-family: var(--serif); font-size: 20px; font-weight: 700;
+  color: var(--verde); text-decoration: none; letter-spacing: -0.3px;
+}
+.nav-logo span {
+  display: block; font-family: var(--sans); font-size: 9px; font-weight: 400;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--suave); margin-top: -2px;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a { font-size: 13.5px; color: var(--texto); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--verde-medio); }
+.nav-cta {
+  background: var(--verde) !important; color: var(--blanco) !important;
+  padding: 9px 20px !important; border-radius: 6px; font-weight: 500 !important;
+}
+.nav-cta:hover { background: var(--verde-medio) !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  background: var(--verde); overflow: hidden;
+}
+.hero-video-wrap {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.hero-video-wrap iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: 177.78vh; height: 56.25vw;
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; border: none;
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: rgba(15,35,17,0.72);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: 120px 48px 80px; width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Texto hero izquierda */
+.hero-left {}
+.hero-eyebrow {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 20px;
+}
+
+/* Título con efecto de cambio */
+.hero-title-wrap {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 600; color: var(--blanco);
+  line-height: 1.1; margin-bottom: 24px;
+}
+.hero-title-static { display: block; margin-bottom: 4px; }
+
+/* Texto rotativo */
+.hero-title-rotating {
+  display: inline-block;
+  position: relative;
+  min-height: 1.2em;
+  overflow: hidden;
+}
+.hero-title-rotating span {
+  display: block;
+  position: absolute;
+  left: 0; top: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.78);
+  font-style: italic;
+}
+.hero-title-rotating span.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+
+.hero-sub {
+  font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.7);
+  line-height: 1.65; margin-bottom: 0; max-width: 420px;
+}
+
+/* Formulario hero derecha */
+.hero-form {
+  background: rgba(255,255,255,0.97);
+  border-radius: 16px;
+  padding: 36px 32px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+}
+.hero-form h3 {
+  font-family: var(--serif);
+  font-size: 20px; font-weight: 600;
+  color: var(--texto); margin-bottom: 6px;
+}
+.hero-form p {
+  font-size: 13px; color: var(--suave);
+  margin-bottom: 24px; line-height: 1.5;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-field {
+  display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px;
+}
+.form-field label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+  color: var(--suave); text-transform: uppercase;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--crema-oscuro);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--texto);
+  background: var(--blanco);
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--verde-claro);
+}
+.form-field textarea { resize: none; height: 80px; }
+.form-submit {
+  width: 100%;
+  background: var(--verde); color: var(--blanco);
+  border: none; border-radius: 8px;
+  padding: 14px; font-family: var(--sans);
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 0.2s, transform 0.2s;
+  margin-top: 4px;
+}
+.form-submit:hover { background: var(--verde-medio); transform: translateY(-1px); }
+.form-note {
+  font-size: 11px; color: var(--suave);
+  text-align: center; margin-top: 10px;
+}
+
+/* ── VARIEDAD ── */
+.variedad { padding: 100px 0; background: var(--blanco); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--verde-claro); margin-bottom: 14px; display: block;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 600; color: var(--texto); line-height: 1.15; margin-bottom: 48px;
+}
+
+.variedad-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.variedad-card {
+  border-radius: 12px; overflow: hidden;
+  position: relative; aspect-ratio: 3/4;
+  cursor: default;
+}
+.variedad-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.variedad-card:hover img { transform: scale(1.06); }
+.variedad-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(10,30,12,0.85) 100%);
+}
+.variedad-card-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px 16px 16px;
+  color: var(--blanco);
+}
+.variedad-card-label h4 {
+  font-family: var(--serif); font-size: 16px; font-weight: 600;
+  line-height: 1.2; margin-bottom: 4px;
+}
+.variedad-card-label p {
+  font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,0.72);
+  line-height: 1.4;
+}
+
+/* ── CASOS DE ÉXITO ── */
+.casos { padding: 100px 0; background: var(--crema); }
+.casos .section-title { margin-bottom: 56px; }
+
+.casos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.caso-card {
+  background: var(--blanco);
+  border-radius: 12px;
+  padding: 36px 32px;
+  border: 1px solid var(--crema-oscuro);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.caso-card:hover {
+  box-shadow: 0 12px 36px rgba(44,74,46,0.1);
+  transform: translateY(-4px);
+}
+.caso-num {
+  font-family: var(--serif); font-size: 13px;
+  color: var(--verde-claro); font-weight: 600;
+  letter-spacing: 1px; margin-bottom: 20px; display: block;
+}
+.caso-logo {
+  font-family: var(--serif); font-size: 22px; font-weight: 700;
+  color: var(--texto); margin-bottom: 12px; line-height: 1.1;
+}
+.caso-desc {
+  font-size: 14px; line-height: 1.65; color: var(--suave);
+}
+.caso-tag {
+  display: inline-block; margin-top: 20px;
+  background: var(--crema); color: var(--verde);
+  font-size: 11px; font-weight: 500;
+  padding: 5px 12px; border-radius: 100px;
+  letter-spacing: 0.5px;
+}
+
+/* ── CTA FINAL ── */
+.cta-banner { padding: 100px 0; background: var(--verde); text-align: center; }
+.cta-banner .section-label { color: rgba(255,255,255,0.5); }
+.cta-banner .section-title { color: var(--blanco); max-width: 580px; margin: 0 auto 16px; font-size: clamp(26px, 3vw, 42px); }
+.cta-banner .sub { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 36px; }
+.btn-blanco {
+  display: inline-block; background: var(--blanco); color: var(--verde);
+  padding: 15px 32px; border-radius: 6px; font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-blanco:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+/* ── FOOTER ── */
+footer { background: #111; color: rgba(255,255,255,0.65); padding: 64px 0 36px; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+.footer-brand .nav-logo { color: var(--blanco); display: inline-block; margin-bottom: 14px; }
+.footer-brand p { font-size: 13.5px; line-height: 1.65; max-width: 280px; }
+.footer-col h4 {
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13.5px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--blanco); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+  display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.3);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-form { max-width: 500px; }
+  .variedad-grid { grid-template-columns: repeat(3, 1fr); }
+  .variedad-card:nth-child(4),
+  .variedad-card:nth-child(5) { display: none; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .container { padding: 0 20px; }
+  .hero-content { padding: 100px 20px 60px; }
+  .nav-links { display: none; }
+  .variedad-grid { grid-template-columns: repeat(2, 1fr); }
+  .variedad-card:nth-child(4),
+  .variedad-card:nth-child(5) { display: block; }
+  .casos-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    Natural Chef
+    <span>Alta Gracia · Córdoba</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="viandas-corporativas.html">Viandas corporativas</a></li>
+    <li><a href="#">Ultracongelados</a></li>
+    <li><a href="#">Pastas</a></li>
+    <li><a href="#contacto" class="nav-cta">Hablar con un asesor</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/-gFDzzwLATo?autoplay=1&mute=1&loop=1&playlist=-gFDzzwLATo&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <!-- Texto izquierda -->
+    <div class="hero-left">
+      <span class="hero-eyebrow">Natural Chef · Servicio B2B</span>
+      <div class="hero-title-wrap">
+        <span class="hero-title-static">Viandas corporativas</span>
+        <div class="hero-title-rotating" id="rotating">
+          <span class="active">en Alta Gracia</span>
+          <span>en Córdoba</span>
+          <span>para tu empresa</span>
+        </div>
+      </div>
+      <p class="hero-sub">
+        Resolvé la alimentación de tus empleados con comida rica, saludable y lista para servir. Producción propia bajo BPM con habilitación SENASA.
+      </p>
+    </div>
+
+    <!-- Formulario derecha -->
+    <div class="hero-form">
+      <h3>Solicitá una propuesta</h3>
+      <p>Te contactamos en menos de 24 horas.</p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-field">
+          <label>Apellido</label>
+          <input type="text" placeholder="Tu apellido">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Empresa</label>
+        <input type="text" placeholder="Nombre de la empresa">
+      </div>
+
+      <div class="form-field">
+        <label>E-mail laboral</label>
+        <input type="email" placeholder="tu@empresa.com">
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+54 9 351...">
+        </div>
+        <div class="form-field">
+          <label>Cantidad de empleados</label>
+          <select>
+            <option value="">Seleccioná</option>
+            <option>1 – 20</option>
+            <option>21 – 50</option>
+            <option>51 – 100</option>
+            <option>Más de 100</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Mensaje (opcional)</label>
+        <textarea placeholder="Contanos qué necesitás..."></textarea>
+      </div>
+
+      <button class="form-submit">Enviar consulta →</button>
+      <p class="form-note">Sin compromiso. Te respondemos en menos de 24 hs.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- VARIEDAD -->
+<section class="variedad" id="variedad">
+  <div class="container">
+    <p class="section-label">Amplia variedad</p>
+    <h2 class="section-title">Opciones para todos los gustos</h2>
+    <div class="variedad-grid">
+
+      <div class="variedad-card">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Ensaladas" loading="lazy">
+        <div class="variedad-card-overlay"></div>
+        <div class="variedad-card-label">
+          <h4>Ensaladas</h4>
+          <p>Frescas y nutritivas</p>
+        </div>
+      </div>
+
+      <div class="variedad-card">
+        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80" alt="Wraps" loading="lazy">
+        <div class="variedad-card-overlay"></div>
+        <div class="variedad-card-label">
+          <h4>Wraps</h4>
+          <p>Prácticos y sabrosos</p>
+        </div>
+      </div>
+
+      <div class="variedad-card">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Platos clásicos" loading="lazy">
+        <div class="variedad-card-overlay"></div>
+        <div class="variedad-card-label">
+          <h4>Platos clásicos</h4>
+          <p>Sabor casero garantizado</p>
+        </div>
+      </div>
+
+      <div class="variedad-card">
+        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&q=80" alt="Vegetariano" loading="lazy">
+        <div class="variedad-card-overlay"></div>
+        <div class="variedad-card-label">
+          <h4>Vegetariano</h4>
+          <p>Opciones plant-based</p>
+        </div>
+      </div>
+
+      <div class="variedad-card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowls saludables" loading="lazy">
+        <div class="variedad-card-overlay"></div>
+        <div class="variedad-card-label">
+          <h4>Bowls saludables</h4>
+          <p>Nutrición completa</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASOS DE ÉXITO -->
+<section class="casos" id="casos">
+  <div class="container">
+    <p class="section-label">Casos de éxito</p>
+    <h2 class="section-title">Empresas que confían en nosotros</h2>
+    <div class="casos-grid">
+
+      <div class="caso-card">
+        <span class="caso-num">01</span>
+        <div class="caso-logo">Aterym<br>Alta Gracia</div>
+        <p class="caso-desc">
+          Servicio de viandas corporativas diarias para el equipo de Aterym. Solución integral de alimentación en Alta Gracia con menú rotativo y entrega puntual.
+        </p>
+        <span class="caso-tag">Alta Gracia, Córdoba</span>
+      </div>
+
+      <div class="caso-card">
+        <span class="caso-num">02</span>
+        <div class="caso-logo">Nemak</div>
+        <p class="caso-desc">
+          Provisión de almuerzos para el personal de planta. Menús variados, saludables y adaptados a los horarios y volúmenes de producción industrial.
+        </p>
+        <span class="caso-tag">Industria automotriz</span>
+      </div>
+
+      <div class="caso-card">
+        <span class="caso-num">03</span>
+        <div class="caso-logo">Grupo<br>Dos Ríos</div>
+        <p class="caso-desc">
+          Alimentación corporativa para todo el grupo. Amplia variedad de opciones diarias con foco en calidad, inocuidad y consistencia en cada entrega.
+        </p>
+        <span class="caso-tag">Córdoba</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-banner" id="contacto">
+  <div class="container">
+    <p class="section-label">Empezá hoy</p>
+    <h2 class="section-title">¿Querés resolver la alimentación de tu empresa?</h2>
+    <p class="sub">Hablá con uno de nuestros asesores y armamos una propuesta a medida.</p>
+    <a href="https://wa.me/5493516000000" class="btn-blanco">Hablar por WhatsApp →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          Natural Chef
+          <span>Alta Gracia · Córdoba</span>
+        </a>
+        <p>Planta productora de alimentos bajo BPM. Soluciones gastronómicas para empresas y operadores del sector en Córdoba.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="viandas-corporativas.html">Viandas corporativas</a></li>
+          <li><a href="#">Ultracongelados</a></li>
+          <li><a href="#">Pastas artesanales</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#">Alta Gracia, Córdoba</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="https://wa.me/5493516000000">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Natural Chef — Aterym Alta Gracia</span>
+      <span>naturalchef.com.ar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Texto rotativo cada 1.5s
+  const items = document.querySelectorAll('#rotating span');
+  let current = 0;
+  setInterval(() => {
+    items[current].classList.remove('active');
+    current = (current + 1) % items.length;
+    items[current].classList.add('active');
+  }, 1500);
+
+  // Ajustar ancho del contenedor rotativo al texto más largo
+  const rotating = document.getElementById('rotating');
+  let maxW = 0;
+  items.forEach(s => {
+    s.style.position = 'relative';
+    maxW = Math.max(maxW, s.offsetWidth);
+    s.style.position = '';
+  });
+  rotating.style.width = maxW + 'px';
+</script>
+
+</body>
+</html>
