@@ -234,6 +234,61 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
   line-height: 1.4;
 }
 
+/* ── PROPUESTA DE VALOR ── */
+.propuesta { padding: 100px 0; background: var(--blanco); }
+.propuesta-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.propuesta-titulo {
+  font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; color: var(--texto); line-height: 1.1;
+  margin-bottom: 36px; letter-spacing: -0.5px;
+}
+.propuesta-lista {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 18px; margin-bottom: 36px;
+}
+.propuesta-lista li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 15.5px; line-height: 1.6; color: var(--texto);
+}
+.check { color: var(--verde-claro); font-size: 15px; font-weight: 700; margin-top: 2px; flex-shrink: 0; }
+.propuesta-link {
+  font-size: 14px; font-weight: 500; color: var(--verde-claro);
+  text-decoration: none; border-bottom: 1px solid var(--verde-claro);
+  padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; display: inline-block;
+}
+.propuesta-link:hover { color: var(--verde); border-color: var(--verde); }
+
+.propuesta-fotos { position: relative; height: 480px; }
+.propuesta-foto-principal {
+  position: absolute; top: 0; left: 0; width: 72%;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2;
+}
+.propuesta-foto-principal img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.propuesta-foto-secundaria {
+  position: absolute; bottom: 0; right: 0; width: 62%;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12); z-index: 3;
+}
+.propuesta-foto-secundaria img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.propuesta-deco-1 {
+  position: absolute; top: 20px; right: 10px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: #7AB8A0; z-index: 1;
+}
+.propuesta-deco-2 {
+  position: absolute; bottom: 80px; left: 60%;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--verde-claro); z-index: 4;
+}
+@media (max-width: 900px) {
+  .propuesta-inner { grid-template-columns: 1fr; gap: 48px; }
+  .propuesta-fotos { height: 360px; }
+}
+
 /* ── CASOS DE ÉXITO ── */
 .casos { padding: 100px 0; background: var(--crema); }
 .casos .section-title { margin-bottom: 56px; }
@@ -477,6 +532,49 @@ footer { background: #111; color: rgba(255,255,255,0.65); padding: 64px 0 36px; 
           <h4>Bowls saludables</h4>
           <p>Nutrición completa</p>
         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA DE VALOR -->
+<section class="propuesta">
+  <div class="container">
+    <div class="propuesta-inner">
+
+      <div class="propuesta-texto">
+        <h2 class="propuesta-titulo">Una opción integral para comer rico, sano y variado</h2>
+        <ul class="propuesta-lista">
+          <li>
+            <span class="check">✓</span>
+            Más de 45 opciones de platos diarios.
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Menú rotativo semanal para que no se repita nunca.
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Opciones para distintas preferencias alimentarias: vegetariano, vegano, sin gluten, etc.
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Viandas termoselladas de entrega diaria.
+          </li>
+        </ul>
+        <a href="#contacto" class="propuesta-link">Descubrí cómo →</a>
+      </div>
+
+      <div class="propuesta-fotos">
+        <div class="propuesta-foto-principal">
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=700&q=80" alt="Vianda corporativa Natural Chef">
+        </div>
+        <div class="propuesta-foto-secundaria">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Variedad de viandas">
+        </div>
+        <div class="propuesta-deco-1"></div>
+        <div class="propuesta-deco-2"></div>
       </div>
 
     </div>
